@@ -1,10 +1,17 @@
+'use client'
 import Image from "next/image";
 import styles from "./page.module.css";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router =useRouter()
+  useEffect(()=>{
+    router.push('/frontend/login')
+  },[])
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
+      {/* <main className={styles.main}>
         <Image
           className={styles.logo}
           src="/next.svg"
@@ -60,7 +67,7 @@ export default function Home() {
             Documentation
           </a>
         </div>
-      </main>
+      </main> */}
     </div>
   );
 }
