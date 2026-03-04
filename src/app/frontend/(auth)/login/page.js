@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const [comment, setComment] = useState();
+  const [comments, setComments] = useState([]);
 
   const [msg, setMsg] = useState();
 
@@ -17,12 +18,21 @@ export default function Page() {
     });
     const data = await response.json();
 
-    setMsg(data.error||data.message);
+    setMsg(data.error || data.message);
   }
 
+  useEffect(() => {
+    async function loadUsers() {
+      const res = await fetch("/api/admin/get-users");
+      const comment = await res.json()
+      console.log(comment)
+      setComments(comment)
+    }
+    loadUsers()
+  }, []);
 
+  console.log(comments);
 
-  console.log(msg);
   return (
     <main>
       <div>
@@ -35,6 +45,9 @@ export default function Page() {
         <button onClick={handleLogin}>Submit</button>
       </div>
       <p style={{ color: "red" }}>message:{msg}</p>
+
+
+      {comments.map((c,i)=>(<div style={{color:'black'}} key={i}>{c.comment}</div>))}
     </main>
   );
 }
