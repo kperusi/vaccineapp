@@ -1,35 +1,40 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 
 export default function Page() {
-const [comment,setComment]=useState()
+  const [comment, setComment] = useState();
+
+  const [msg, setMsg] = useState();
 
   async function handleLogin() {
-    await fetch("/api/login", {
+    const response = await fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ comment:comment }),
+      body: JSON.stringify({ comment: comment }),
     });
+    const data = await response.json();
+
+    setMsg(data.error||data.message);
   }
 
-  //   async function create() {
-  //     'use server';
-  //     // Connect to the Neon database
-  //     const sql = neon(`${process.env.DATABASE_URL}`);
-  //     const comment = 'Coming home';
-  //     // Insert the comment from the form into the Postgres database
-  //   await sql`INSERT INTO comments (comment) VALUES (${comment})`;
-  //   }
 
 
-  console.log(comment)
+  console.log(msg);
   return (
-    <form>
-      <input type="text" placeholder="write a comment" name="comment"  onChange={(e)=>setComment(e.target.value)}/>
-      <button onClick={handleLogin}>Submit</button>
-    </form>
+    <main>
+      <div>
+        <input
+          type="text"
+          placeholder="write a comment"
+          name="comment"
+          onChange={(e) => setComment(e.target.value)}
+        />
+        <button onClick={handleLogin}>Submit</button>
+      </div>
+      <p style={{ color: "red" }}>message:{msg}</p>
+    </main>
   );
 }

@@ -1,7 +1,8 @@
+'use server'
 import { neon } from '@neondatabase/serverless';
 
 export async function POST(request) {
-    
+
   try {
     const { comment } = await request.json();
 
