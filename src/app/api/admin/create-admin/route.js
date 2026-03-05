@@ -15,7 +15,7 @@ export async function POST() {
       name VARCHAR(255),
       status VARCHAR(20) DEFAULT 'active',
       last_login TIMESTAMP,
-      facility_id INTEGER
+      facility_id INTEGER,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
