@@ -1,7 +1,7 @@
 "use server";
 import { NextResponse } from "next/server";
 import sql from "../../../lib/db";
-import bcrpt from "bcryptjs";
+import bcrypt from "bcryptjs";
 export async function POST() {
   try {
     const passwordHash = await bcrypt.hash(password, 10);
@@ -21,10 +21,10 @@ export async function POST() {
     )
   `;
 
-    // await sql`
-    //   INSERT INTO users (username,password, email, role,name)
-    //   VALUES (Johnbull123,${passwordHash},johnbull123@gmail.com,superadmin,Johnbull Adams)
-    // `;
+    await sql`
+      INSERT INTO users (username,password, email, role,name)
+      VALUES (Johnbull123,${passwordHash},johnbull123@gmail.com,superadmin,Johnbull Adams)
+    `;
 
     return NextResponse.json(
       { message: "admin created successfully" },
