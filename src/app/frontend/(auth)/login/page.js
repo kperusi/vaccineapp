@@ -47,7 +47,7 @@ export default function Page() {
       <p style={{ color: "red" }}>message:{msg}</p>
 
 
-      {comments.map((c,i)=>(<div style={{color:'black'}} key={i}>{c.comment}</div>))}
+      {comments?.map((c,i)=>(<div style={{color:'black'}} key={i}>{c.comment}</div>))}
     </main>
   );
 }
