@@ -1,10 +1,11 @@
-'use server'
+"use server";
+import { NextResponse } from "next/server";
 import sql from "../../../lib/db";
-import bycrpt from 'bcryptjs'
+import bcrpt from "bcryptjs";
 export async function POST() {
-
   try {
-  await sql`
+    const passwordHash = await bcrypt.hash(password, 10);
+    await sql`
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
       username VARCHAR(100) UNIQUE NOT NULL,
@@ -19,23 +20,19 @@ export async function POST() {
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `;
- const passwordHash = await bcrypt.hash(password, 10);
+
     await sql`
       INSERT INTO users (username,password, email, role,name)
       VALUES (Johnbull123,${passwordHash},johnbull123@gmail.com,superadmin,Johnbull Adams)
     `;
 
-    return Response.json(
-      { message: 'admin created successfully' },
-      { status: 201 }
+    return NextResponse.json(
+      { message: "admin created successfully" },
+      { status: 201 },
     );
-
   } catch (error) {
     console.error(error);
 
-    return Response.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
