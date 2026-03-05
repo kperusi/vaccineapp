@@ -1,7 +1,7 @@
 .page {
   --background: #fafafa;
   --foreground: #fff;
-border: solid red;
+
   --text-primary: #000;
   --text-secondary: #666;
 
@@ -14,7 +14,7 @@ border: solid red;
   align-items: center;
   justify-content: center;
   font-family: var(--font-geist-sans);
-  background-color: white;
+  background-color: #fafafa;
 }
 
 .main {

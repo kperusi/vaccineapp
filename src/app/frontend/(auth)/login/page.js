@@ -1,12 +1,17 @@
 "use client";
-
+import "../../../styles/styles.css";
 import { useEffect, useState } from "react";
-
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 export default function Page() {
   const [comment, setComment] = useState();
   const [comments, setComments] = useState([]);
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [visible, setVisible] = useState(true);
   const [msg, setMsg] = useState();
+  const router=useRouter()
 
   async function handleLogin() {
     const response = await fetch("/api/login", {
@@ -14,40 +19,90 @@ export default function Page() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ comment: comment }),
+      body: JSON.stringify({ email, password }),
     });
     const data = await response.json();
-
+    console.log(data);
     setMsg(data.error || data.message);
+
+    if(data.status===201){
+      router.push('/frontend/admin/dashboard')
+      localStorage.setItem('vax-login-user',JSON.stringify(data.user))
+    }
   }
 
-  useEffect(() => {
-    async function loadUsers() {
-      const res = await fetch("/api/admin/get-users");
-      const comment = await res.json()
-      console.log(comment)
-      setComments(comment)
-    }
-    loadUsers()
-  }, []);
+  const handlePasswordVisible = () => {
+    setVisible(!visible);
+  };
 
-  console.log(comments);
+
+
+  console.log(email);
 
   return (
-    <main>
-      <div>
-        <input
-          type="text"
-          placeholder="write a comment"
-          name="comment"
-          onChange={(e) => setComment(e.target.value)}
-        />
-        <button onClick={handleLogin}>Submit</button>
+    <main
+      style={{
+        height: "100vh",
+      }}
+      className="flex fxd-r login-cx"
+    >
+      <div className="ds-bg">
+        <h2>
+          <strong>Welcome Back </strong>
+          Vax Disperser Control
+        </h2>
       </div>
-      <p style={{ color: "red" }}>message:{msg}</p>
+      <div className="login-form flex fxd-c">
+        <div className="ms-bg"></div>
+        <div className="flex fxd-c p-30  input-group gap-20 justify-c align-item-c">
+          <div className="flex fxd-c w-full ">
+            <h2 className="color-black">Welcome back to Vax</h2>
+            <h3 className="color-grey">Login to Continue</h3>
+          </div>
+          <div className="flex fxd-c w-full p-t-20">
+            <label>Username</label>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="flex fxd-c w-full">
+            <label>Password</label>
+            {/* <div className="password-input-cx flex"> */}
+            <input
+              type={visible ? "password" : "text"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              autoComplete="off"
+            />
+            <Image
+              style={{ alignSelf: "flex-end" }}
+              onClick={handlePasswordVisible}
+              alt="password visibility"
+              width={20}
+              height={20}
+              src={`${visible ? "/visibility_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" : "/visibility_off_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"}`}
+            />
+            {/* </div> */}
+          </div>
 
-
-      {comments?.map((c,i)=>(<div style={{color:'black'}} key={i}>{c.comment}</div>))}
+          <button
+            onClick={handleLogin}
+            className="bg-darkblue color-white outline-none border-none border-r-8 p-15 m-t-20 w-50p"
+          >
+            Login
+          </button>
+          <div style={{ height: "50px" }} className="p-10">
+            {" "}
+            {error && <p className="color-red">{error}</p>}
+          </div>
+        </div>
+      </div>
     </main>
   );
 }

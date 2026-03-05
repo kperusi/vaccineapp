@@ -11,18 +11,18 @@ export default function Home() {
   const [msg, setMsg] = useState();
 
   async function createAdmin() {
-    const res = await fetch("/api/admin/create-admin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const _res = await res.json();
-    console.log(_res);
-    if(_res.status!=500){
-       router.push("/frontend/login");
-    }
-   
+    // const res = await fetch("/api/admin/create-admin", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // const _res = await res.json();
+    // console.log(_res);
+    // if(_res.status!=500){
+     
+    // }
+     router.push("/frontend/login");
   }
 
   return (
