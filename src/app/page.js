@@ -19,7 +19,10 @@ export default function Home() {
     });
     const _res = await res.json();
     console.log(_res);
-    router.push("/frontend/login");
+    if(_res.status!=500){
+       router.push("/frontend/login");
+    }
+   
   }
 
   return (

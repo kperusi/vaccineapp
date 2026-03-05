@@ -4,7 +4,7 @@ import sql from "../../../lib/db";
 import bcrypt from "bcryptjs";
 export async function POST() {
   try {
-    const passwordHash = await bcrypt.hash(password, 10);
+    const passwordHash = await bcrypt.hash('123456', 10);
     await sql`
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
@@ -21,10 +21,10 @@ export async function POST() {
     )
   `;
 
-    await sql`
-      INSERT INTO users (username,password, email, role,name)
-      VALUES (Johnbull123,${passwordHash},johnbull123@gmail.com,superadmin,Johnbull Adams)
-    `;
+    // await sql`
+    //   INSERT INTO users (username,password, email, role,name)
+    //   VALUES (Johnbull123,${passwordHash},johnbull123@gmail.com,superadmin,Johnbull Adams)
+    // `;
 
     return NextResponse.json(
       { message: "admin created successfully" },
