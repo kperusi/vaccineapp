@@ -21,10 +21,10 @@ export async function POST() {
     )
   `;
 
-    await sql`
-      INSERT INTO users (username,password, email, role,name)
-      VALUES (Johnbull123,${passwordHash},johnbull123@gmail.com,superadmin,Johnbull Adams)
-    `;
+    // await sql`
+    //   INSERT INTO users (username,password, email, role,name)
+    //   VALUES (Johnbull123,${passwordHash},johnbull123@gmail.com,superadmin,Johnbull Adams)
+    // `;
 
     return NextResponse.json(
       { message: "admin created successfully" },

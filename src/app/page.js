@@ -1,31 +1,37 @@
-'use client'
+"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
-import './styles/styles.css'
+import "./styles/styles.css";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const router =useRouter()
+  const router = useRouter();
 
-  const [msg,setMsg]=useState()
+  const [msg, setMsg] = useState();
 
   async function createAdmin() {
-   const res= await fetch('/api/admin/create-admin')
-    const _res = await res.json()
-console.log(_res)
-router.push('/frontend/login')
+    const res = await fetch("/api/admin/create-admin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const _res = await res.json();
+    console.log(_res);
+    router.push("/frontend/login");
   }
-
 
   return (
     <div className={styles.page}>
-       <div className={styles.container}>
-          <div className={styles.card}>
-            <h1>Welcome to Vaccine App</h1>
-            <button className="btn-main" onClick={createAdmin}>Continue</button>
-          </div>
+      <div className={styles.container}>
+        <div className={styles.card}>
+          <h1>Welcome to Vaccine App</h1>
+          <button className="btn-main" onClick={createAdmin}>
+            Continue
+          </button>
         </div>
+      </div>
       {/* <main className={styles.main}>
         <Image
           className={styles.logo}
@@ -83,9 +89,6 @@ router.push('/frontend/login')
           </a>
         </div>
       </main> */}
-
-
-      
     </div>
   );
 }
