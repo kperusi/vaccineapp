@@ -4,7 +4,7 @@ import sql from "../../../lib/db";
 import bcrypt from "bcryptjs";
 export async function POST() {
   try {
-    const passwordHash = await bcrypt.hash('123456', 10);
+    const passwordHash = await bcrypt.hash("123456", 10);
     await sql`
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
@@ -21,10 +21,15 @@ export async function POST() {
     )
   `;
 
+    const username = "Johnbull123";
+    const email = "johnbull123@gmail.com";
+    const role = "superadmin";
+    const name = "Johnbull Adams";
+
     await sql`
-      INSERT INTO users (username,password, email, role,name)
-      VALUES (Johnbull123,${passwordHash},johnbull123@gmail.com,superadmin,Johnbull Adams)
-    `;
+  INSERT INTO users (username, password, email, role, name)
+  VALUES (${username}, ${passwordHash}, ${email}, ${role}, ${name})
+`;
 
     return NextResponse.json(
       { message: "admin created successfully" },
@@ -33,6 +38,9 @@ export async function POST() {
   } catch (error) {
     console.error(error);
 
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }
