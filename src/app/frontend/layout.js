@@ -46,7 +46,8 @@ export default function AdminLayout({ children }) {
     }
     loadDate();
   }, []);
-   console.log(user);
+   
+  console.log('from layout',user);
 
 async function fetchRequests(){
 
