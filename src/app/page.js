@@ -12,7 +12,6 @@ export default function Home() {
 
   async function createAdmin() {
 
-
 await fetch("/api/seedscript", {
       method: "POST",
       headers: {
