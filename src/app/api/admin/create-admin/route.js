@@ -7,12 +7,13 @@ export async function POST() {
     const passwordHash = await bcrypt.hash("123456", 10);
     await sql`
     CREATE TABLE IF NOT EXISTS users (
-      id SERIAL PRIMARY KEY,
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
       username VARCHAR(100) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
       email VARCHAR(255) UNIQUE NOT NULL,
       role VARCHAR(50) DEFAULT 'user',
       name VARCHAR(255),
+      phone,
       status VARCHAR(20) DEFAULT 'active',
       last_login TIMESTAMP,
       facility_id INTEGER,
@@ -25,10 +26,11 @@ export async function POST() {
     const email = "johnbull123@gmail.com";
     const role = "superadmin";
     const name = "Johnbull Adams";
+    const phone='07066754322'
 
     await sql`
-  INSERT INTO users (username, password, email, role, name)
-  VALUES (${username}, ${passwordHash}, ${email}, ${role}, ${name})
+  INSERT INTO users (username, password, email, role, name,phone)
+  VALUES (${username}, ${passwordHash}, ${email}, ${role}, ${name},${phone})
 `;
 
     return NextResponse.json(
