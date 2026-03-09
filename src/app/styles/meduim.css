@@ -5,27 +5,23 @@
     width: 100% !important;
     height: 100vh;
     gap: 0;
-
   }
   .ds-bg {
-   width: 100% !important;
-   height:30vh !important;
- 
-  
+    width: 100% !important;
+    height: 30vh !important;
   }
-  .p-md-0{
+  .p-md-0 {
     padding: 0;
   }
-  
+
   .login-form {
-padding: 0 20px;
+    padding: 0 20px;
     width: 100% !important;
-height:fit-content !important;
+    height: fit-content !important;
     background-color: white;
     /* background-image: url("../../assets/images/bg-pattern-circles.svg"); */
     background-repeat: no-repeat;
     background-position: 200px 400px !important;
-   
   }
   .ms-bg {
     display: none;
@@ -35,14 +31,18 @@ height:fit-content !important;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 0px 0px;
-  
   }
-  .dashboard{
-  
+  .dashboard {
   }
-  .ms-header{
-  
+  .ms-header {
     display: flex !important;
     width: 100%;
+  }
+  .main-dashboard {
+  
+  }
+  body{
+  
+    height: 100vh;
   }
 }

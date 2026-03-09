@@ -1,6 +1,6 @@
 /* Container styling */
 .scroll-container {
-  max-height: 454px;
+  /* max-height: 454px; */
   overflow-y: auto;
   
   /* Firefox support */

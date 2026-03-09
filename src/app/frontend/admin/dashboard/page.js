@@ -80,8 +80,8 @@ export default function Page() {
 
   return (
     <main
-      style={{ height: "70vh" }}
-      className="scroll-container w-full flex fxd-c"
+     
+      className="scroll-container w-full flex fxd-c main-dashboard "
     >
       <section className="p-l-r-30 p-t-20">
         <section className="stats">

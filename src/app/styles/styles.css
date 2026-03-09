@@ -12,6 +12,11 @@
 @import "positions.css";
 @import "mobil-small.css";
 @import "meduim.css";
+.main-dashboard{
+
+height: 80vh;
+padding-bottom: 50px;
+}
 .fxd-r {
   flex-direction: row;
 }
