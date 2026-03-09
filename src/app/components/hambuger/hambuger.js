@@ -33,12 +33,12 @@ export default function Hamburger() {
         </div>
 
         <div className="drawer-links">
-          <Link href="/admin/dashboard" onClick={closeMenu}>Dashboard</Link>
-          <Link href="/admin/points" onClick={closeMenu}>Health Centers</Link>
-          <Link href="/admin/vaccine" onClick={closeMenu}>Vaccines</Link>
-          <Link href="/admin/inventor" onClick={closeMenu}>Inventory</Link>
-          <Link href="/admin/requests" onClick={closeMenu}>Requests</Link>
-          <Link href="/admin/reports" onClick={closeMenu}>Reports</Link>
+          <Link href="/frontend/admin/dashboard" onClick={closeMenu}>Dashboard</Link>
+          <Link href="/frontend/admin/points" onClick={closeMenu}>Health Centers</Link>
+          <Link href="/frontend/admin/vaccine" onClick={closeMenu}>Vaccines</Link>
+          <Link href="/frontend/admin/inventory" onClick={closeMenu}>Inventory</Link>
+          <Link href="/frontend/admin/requests" onClick={closeMenu}>Requests</Link>
+          <Link href="/frontend/admin/reports" onClick={closeMenu}>Reports</Link>
         </div>
 
         <button className="logout drawer-logout">Logout</button>
