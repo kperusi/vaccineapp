@@ -43,10 +43,8 @@ export default function Page() {
 
   return (
     <main
-      style={{
-        height: "100vh",
-      }}
-      className="flex fxd-r login-cx"
+   
+      className="flex login-cx"
     >
       <div className="ds-bg">
         <h2>
@@ -56,9 +54,9 @@ export default function Page() {
       </div>
       <div className="login-form flex fxd-c">
         <div className="ms-bg"></div>
-        <div className="flex fxd-c p-30  input-group gap-20 justify-c align-item-c">
+        <div className="flex fxd-c p-30 p-md-0  input-group gap-20 justify-c align-item-c">
           <div className="flex fxd-c w-full ">
-            <h2 className="color-black">Welcome back to Vax</h2>
+            <h2 className="color-black"></h2>
             <h3 className="color-grey">Login to Continue</h3>
           </div>
           <div className="flex fxd-c w-full p-t-20">

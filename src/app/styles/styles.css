@@ -11,7 +11,7 @@
 @import "scrollbar.css";
 @import "positions.css";
 @import "mobil-small.css";
-
+@import "meduim.css";
 .fxd-r {
   flex-direction: row;
 }
@@ -1307,30 +1307,7 @@ select {
 
 /* ////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
-@media (max-width: 768px) {
-  .login-cx {
-  
 
-    
-  }
-  .login-form {
-    height: 94vh;
-    width: 51%;
-    
-    background-color: white;
-    /* background-image: url("../../assets/images/bg-pattern-circles.svg"); */
-    background-repeat: no-repeat;
-    background-position: 200px 400px !important;
-    background-size: 100% !important;
-  }
-  .ms-bg {
-    height: 300px;
-    /* background-image: url("../../assets/images/bg-sidebar-mobile.svg"); */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
-  }
-}
 @media (max-width: 1024px) {
   /* small laptop */
 

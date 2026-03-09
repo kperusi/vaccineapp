@@ -1,0 +1,40 @@
+@media (max-width: 768px) {
+  .login-cx {
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+    height: 100vh;
+    gap: 0;
+
+  }
+  .ds-bg {
+   width: 100% !important;
+   height:30vh !important;
+ 
+  
+  }
+  .p-md-0{
+    padding: 0;
+  }
+  
+  .login-form {
+padding: 0 20px;
+    width: 100% !important;
+height:fit-content !important;
+    background-color: white;
+    /* background-image: url("../../assets/images/bg-pattern-circles.svg"); */
+    background-repeat: no-repeat;
+    background-position: 200px 400px !important;
+   
+  }
+  .ms-bg {
+    display: none;
+    width: 100%;
+    height: 300px;
+    background: url("../../../public/automated-vaccine-system-carousel.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    border: solid red;
+  }
+}
