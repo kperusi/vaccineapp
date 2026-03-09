@@ -27,15 +27,15 @@ export default function PointDashboard() {
       const _healthPoint = facilities.find((i) => i.id == id);
 
       setFacility(_healthPoint);
-      console.log(_healthPoint)
+      console.log(_healthPoint);
       const userRes = await fetch("/api/admin/get-users");
       const users = await userRes.json();
-console.log(users)
+      console.log(users);
       const user = users.find((i) => i.facility_id == _healthPoint.id);
       setUser(user);
 
       const invRes = await fetch(
-        `/api/points/get-facility-inventory?id=${_healthPoint.id}`,
+        `/api/point/get-facility-inventory/${_healthPoint.id}`,
       );
 
       const inv = await invRes.json();
@@ -79,7 +79,7 @@ console.log(users)
     );
   }
 
-  console.log(user)
+  console.log(user);
 
   return (
     <main className="dashboard-container flex fxd-c scroll-container ">
@@ -121,7 +121,12 @@ console.log(users)
         <aside className="admin-card">
           <div className="card-header-flex">
             <h3>Vaccine inventory</h3>
-            <button className="btn-text" onClick={()=>router.push('./allocate-vaccine')}>+ Allocate Vaccine</button>
+            <button
+              className="btn-text"
+              onClick={() => router.push("./allocate-vaccine")}
+            >
+              + Allocate Vaccine
+            </button>
           </div>
 
           <div className="assignment-table-wrapper">
@@ -180,7 +185,6 @@ console.log(users)
             <div className="data-row">
               <label>Email</label>
               <p> {user?.email}</p>
-         
             </div>
             <div
               style={{

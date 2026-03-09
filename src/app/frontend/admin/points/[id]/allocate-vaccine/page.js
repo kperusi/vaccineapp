@@ -1,8 +1,8 @@
 "use client";
-import getDay from "../../../../utils/day";
-import { userContext } from "../../../../context/userContext";
+import getDay from "../../../../../utils/day";
+import { globalContext } from "../../../../../utils/context/globalContext";
 import React, { useState, useEffect, useContext } from "react";
-import getDate from "../../../../utils/date";
+import getDate from "../../../../../utils/date";
 import { useParams } from "next/navigation";
 
 export default function AllocateVaccine() {
@@ -17,7 +17,7 @@ export default function AllocateVaccine() {
   const [selected, setSelected] = useState();
   const [selectedExpiry, setSelectedExpiry] = useState();
   const [facility, setFacility] = useState();
-  const { inventories, healthPoints } = useContext(userContext);
+  const { inventories, healthPoints } = useContext(globalContext);
   const [daysToExpiry, setDaysToExpiry] = useState();
   const params = useParams();
   const { id } = params;
@@ -37,7 +37,7 @@ export default function AllocateVaccine() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("/api/create-allocation", {
+    const res = await fetch("/api/admin/create-allocation", {
       method: "POST",
       body: JSON.stringify(form),
     });
