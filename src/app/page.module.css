@@ -130,7 +130,7 @@ a.secondary {
   .page {
     --background:white;
     --foreground: #000;
-border: solid red;
+
     --text-primary: #ededed;
     --text-secondary: #999;
 
