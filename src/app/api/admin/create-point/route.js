@@ -1,22 +1,17 @@
 export const runtime = "nodejs";
 import bcrypt from "bcryptjs";
-import postgres from "postgres";
-
+import sql from '../../../lib/db'
 // import { cookies } from "next/headers";
 
 export async function POST(req) {
-  const sql = postgres(process.env.POSTGRES_URL, {
-    ssl: process.env.NODE_ENV === "production" ? "require" : false,
-    idle_timeout: 20,
-  });
-
+ 
   try {
     // const role = cookies().get("user_role")?.value;
 
      const { name, email, password,user } = await req.json();
-
+console.log(user)
     // Admin-only
-    if (user.role !== "CONTROL") {
+    if (user.role !== "superadmin") {
       return new Response(JSON.stringify({ message: "Unauthorized" }), {
         status: 403,
       });

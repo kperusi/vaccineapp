@@ -210,7 +210,7 @@ export default function AdminLayout({ children }) {
     if (pathname.includes("create-facilities")) return "Add Health Centers";
   };
 
-console.log(requests)
+
   return (
     <main className="dashboard">
       <globalContext.Provider

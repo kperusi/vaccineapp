@@ -24,15 +24,16 @@ export default function AllocateVaccine() {
 
   useEffect(() => {
     const loadFacility = async () => {
-      console.log(healthPoints);
+      console.log('0000',healthPoints);
 
-      const _healthPoint = healthPoints.find((i) => i.id == id);
+      const _healthPoint = healthPoints?.find((i) => i.id == id);
       setFacility(_healthPoint);
+      console.log(_healthPoint)
       setForm({ ...form, facility_id: id });
     };
 
     loadFacility();
-  }, []);
+  }, [healthPoints]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,7 +72,7 @@ export default function AllocateVaccine() {
 
     setForm({ ...form, inventory_id: id });
   };
-  console.log(facility);
+  console.log(form);
   return (
     <main className="scroll-container p-t-20">
       <section

@@ -2,6 +2,7 @@ import sql from "../../../lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
+
   try {
     const { inventory_id, facility_id, quantity, notes } = await req.json();
 
@@ -40,6 +41,8 @@ export async function POST(req) {
       FOREIGN KEY (vaccine_type_id) REFERENCES vaccine_types(id) ON DELETE CASCADE
     )`;
 
+    console.log('start--',inventory_id, facility_id, quantity, notes)
+
     const invItem = await sql`
       SELECT * FROM inventory WHERE id = ${inventory_id} 
       AND quantity>0 ORDER BY expiry_date ASC,quantity DESC LIMIT 1
@@ -65,21 +68,23 @@ export async function POST(req) {
       WHERE id = ${inventory_id}
     `;
 
+
+
     await sql`
     INSERT INTO vaccine_allocations (inventory_id,facility_id,quantity_allocated,notes)
    VALUES(${inventory_id},${facility_id},${quantity},${notes})
     `;
-    console.log(
-      inventory_id,
-      facility_id,
-      quantity,
-      notes,
-      inventoryItem.vaccine_type_id,
-      inventoryItem.batch_number,
-      inventoryItem.manufacturer_date,
-      inventoryItem.expiry_date,
-      inventoryItem.storage_condition,
-    );
+    // console.log(
+    //   inventory_id,
+    //   facility_id,
+    //   quantity,
+    //   notes,
+    //   inventoryItem.vaccine_type_id,
+    //   inventoryItem.batch_number,
+    //   inventoryItem.manufacturer_date,
+    //   inventoryItem.expiry_date,
+    //   inventoryItem.storage_condition,
+    // );
     await sql`
       INSERT INTO facility_inventory (facility_id, vaccine_type_id,batch_number,expiry_date,manufacturer_date, quantity,storage_condition)
       VALUES (${facility_id}, ${inventoryItem.vaccine_type_id}, ${inventoryItem.batch_number},${inventoryItem.manufacturer_date},${inventoryItem.expiry_date},${quantity},${inventoryItem.storage_condition})
@@ -88,7 +93,7 @@ export async function POST(req) {
       updated_at = CURRENT_TIMESTAMP
     `;
 
-    console.log("...........");
+  
     return new Response(
       JSON.stringify({ message: "Vaccine allocation successful" }),
       {
