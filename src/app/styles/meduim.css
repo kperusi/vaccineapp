@@ -35,6 +35,14 @@ height:fit-content !important;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 0px 0px;
-    border: solid red;
+  
+  }
+  .dashboard{
+  
+  }
+  .ms-header{
+  
+    display: flex !important;
+    width: 100%;
   }
 }
