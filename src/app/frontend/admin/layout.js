@@ -6,18 +6,19 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import "../globals.css";
+import "../../globals.css";
 // import '../styles/responsivestyles.css'
-import "../styles/styles.css";
+import "../../styles/styles.css";
 import { useEffect, useState } from "react";
-import { globalContext } from "../utils/context/globalContext";
+import { globalContext } from "../../utils/context/globalContext";
 import Link from "next/link";
-import Hamburger from "../components/hambuger/hambuger";
+import Hamburger from "../../components/hambuger/hambuger";
 
 export default function AdminLayout({ children }) {
   const router = useRouter();
   const [inventories, setInventories] = useState([]);
   const [totalVaccine, setTotalVaccines] = useState("");
+  const [vaccines, setVaccines] = useState([]);
   const [user, setUser] = useState();
   const [requests, setRequests] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
@@ -46,108 +47,107 @@ export default function AdminLayout({ children }) {
     }
     loadDate();
   }, []);
-   
-  console.log('from layout',user);
 
-async function fetchRequests(){
+ 
+ async function fetchVaccines() {
+      const vaccinRes = await fetch("/api/admin/get-vaccines");
+      const _vaccines = await vaccinRes.json();
+      setVaccines(_vaccines);
+  
+ }
+  async function fetchRequests() {
+    const res = await fetch("/api/admin/get-requests");
+    const data = await res.json();
+    setRequests(data);
 
-      const res = await fetch("/api/get-requests");
-      const data = await res.json();
-      setRequests(data);
+    const facility_requests = data.reduce((acc, request) => {
+      const key = request.facility_id;
+      if (!acc[key]) acc[key] = [];
+      acc[key].push(request);
+      return acc;
+    }, {});
 
-      const facility_requests = data.reduce((acc, request) => {
-        const key = request.facility_id;
-        if (!acc[key]) acc[key] = [];
-        acc[key].push(request);
-        return acc;
-      }, {});
+    setFacilityRequests(facility_requests);
 
-      setFacilityRequests(facility_requests);
+    const filterByStatus = (status) => {
+      const filtered = Object.keys(facility_requests).reduce(
+        (acc, facilityId) => {
+          // Filter the array of requests for THIS specific facility
+          const matches = facility_requests[facilityId].filter(
+            (req) => req.status === status,
+          );
 
-      const filterByStatus = (status) => {
-        const filtered = Object.keys(facility_requests).reduce(
-          (acc, facilityId) => {
-            // Filter the array of requests for THIS specific facility
-            const matches = facility_requests[facilityId].filter(
-              (req) => req.status === status,
-            );
+          // Only add to the new object if the facility actually has requests with that status
+          if (matches.length > 0) {
+            acc[facilityId] = matches;
+          }
 
-            // Only add to the new object if the facility actually has requests with that status
-            if (matches.length > 0) {
-              acc[facilityId] = matches;
-            }
+          return acc;
+        },
+        {},
+      );
 
-            return acc;
-          },
-          {},
-        );
-
-        return filtered;
-      };
-
-      const pendingFacilityRequests = filterByStatus("Pending");
-
-
-      setPendingFacilityRequest(pendingFacilityRequests);
-
-      const pendingRequest = data.filter((i) => i.status === "pending");
-      setPendingRequests(pendingRequest || []);
-      if (res.status === 201) {
-        setLoading(false);
-      }
+      return filtered;
     };
 
+    const pendingFacilityRequests = filterByStatus("Pending");
 
+    setPendingFacilityRequest(pendingFacilityRequests);
 
-
+    const pendingRequest = data.filter((i) => i.status === "pending");
+    setPendingRequests(pendingRequest || []);
+    if (res.status === 201) {
+      setLoading(false);
+    }
+  }
 
   useEffect(() => {
     const fetchRequests = async () => {
-      const res = await fetch("/api/get-requests");
-      const data = await res.json();
-      setRequests(data);
-
-      const facility_requests = data.reduce((acc, request) => {
-        const key = request.facility_id;
-        if (!acc[key]) acc[key] = [];
-        acc[key].push(request);
-        return acc;
-      }, {});
-
-      setFacilityRequests(facility_requests);
-
-      const filterByStatus = (status) => {
-        const filtered = Object.keys(facility_requests).reduce(
-          (acc, facilityId) => {
-            // Filter the array of requests for THIS specific facility
-            const matches = facility_requests[facilityId].filter(
-              (req) => req.status === status,
-            );
-
-            // Only add to the new object if the facility actually has requests with that status
-            if (matches.length > 0) {
-              acc[facilityId] = matches;
-            }
-
-            return acc;
-          },
-          {},
-        );
-
-        return filtered;
-      };
-      const pendingFacilityRequests = filterByStatus("Pending");
-      setPendingFacilityRequest(pendingFacilityRequests);
-      const pendingRequest = data.filter((i) => i.status === "pending");
-      setPendingRequests(pendingRequest || []);
-
-      const res2 = await fetch("/api/get-inventories");
+      const res2 = await fetch("/api/admin/get-inventories");
       const { inventories, total_vaccines } = await res2.json();
       console.log(total_vaccines);
       setInventories(inventories);
       setTotalVaccines(
         inventories?.reduce((sum, item) => sum + item.quantity, 0),
       );
+
+      const res = await fetch("/api/admin/get-requests");
+      const data = await res.json();
+      setRequests(data);
+
+      const facility_requests = data.reduce((acc, request) => {
+        const key = request.facility_id;
+        if (!acc[key]) acc[key] = [];
+        acc[key].push(request);
+        return acc;
+      }, {});
+
+      setFacilityRequests(facility_requests);
+
+      const filterByStatus = (status) => {
+        const filtered = Object.keys(facility_requests).reduce(
+          (acc, facilityId) => {
+            // Filter the array of requests for THIS specific facility
+            const matches = facility_requests[facilityId].filter(
+              (req) => req.status === status,
+            );
+
+            // Only add to the new object if the facility actually has requests with that status
+            if (matches.length > 0) {
+              acc[facilityId] = matches;
+            }
+
+            return acc;
+          },
+          {},
+        );
+
+        return filtered;
+      };
+      const pendingFacilityRequests = filterByStatus("Pending");
+      setPendingFacilityRequest(pendingFacilityRequests);
+      const pendingRequest = data.filter((i) => i.status === "pending");
+      setPendingRequests(pendingRequest || []);
 
       if (res.status === 201) {
         setLoading(false);
@@ -159,7 +159,7 @@ async function fetchRequests(){
 
   useEffect(() => {
     async function loadData() {
-      const res1 = await fetch("/api/get-facilities");
+      const res1 = await fetch("/api/admin/get-facilities");
       const facilities = await res1.json();
       setHealthPoints(facilities);
 
@@ -167,11 +167,15 @@ async function fetchRequests(){
         setHealthPoints([]);
       }
 
-      const res3 = await fetch("/api/get-allocations");
+      const vaccinRes = await fetch("/api/admin/get-vaccines");
+      const _vaccines = await vaccinRes.json();
+      setVaccines(_vaccines);
+
+      const res3 = await fetch("/api/admin/get-allocations");
       const allocations = (await res3.json()) || [];
       setAllocations(allocations);
 
-      if (res3.status === 201) {
+      if (res3.status === 200) {
         setLoading(false);
       }
     }
@@ -181,7 +185,7 @@ async function fetchRequests(){
 
   useEffect(() => {
     async function fetchFacilityAdmin() {
-      const res = await fetch("/api/get-users");
+      const res = await fetch("/api/admin/get-users");
       const data = await res.json();
       setFacilityAdmin(data);
     }
@@ -191,7 +195,7 @@ async function fetchRequests(){
   }, []);
 
   async function fetchFacilities() {
-    const res1 = await fetch("/api/get-facilities");
+    const res1 = await fetch("/api/admin/get-facilities");
     const facilities = await res1.json();
     setHealthPoints(facilities);
   }
@@ -206,10 +210,14 @@ async function fetchRequests(){
     if (pathname.includes("create-facilities")) return "Add Health Centers";
   };
 
+console.log(requests)
   return (
     <main className="dashboard">
       <globalContext.Provider
         value={{
+          vaccines: vaccines,
+          setVaccines: setVaccines,
+          fetchVaccines:fetchVaccines,
           requests: requests,
           pendingRequests: pendingRequests,
           totalVaccine: totalVaccine,
@@ -220,7 +228,7 @@ async function fetchRequests(){
           fetchFacilities: fetchFacilities,
           facilityRequests: facilityRequests,
           pendingFacilityRequest: pendingFacilityRequest,
-          fetchRequests:fetchRequests
+          fetchRequests: fetchRequests,
         }}
       >
         <aside className="sidebar">
@@ -228,21 +236,21 @@ async function fetchRequests(){
 
           <nav>
             <div>
-              <Link href="/admin/dashboard">Dashboard</Link>
+              <Link href="/frontend/admin/dashboard">Dashboard</Link>
             </div>
             <div>
-              <Link href="/admin/points">Health Centers</Link>
-            </div>
-            <div>
-              {" "}
-              <Link href="/admin/vaccine">Vaccines</Link>
+              <Link href="/frontend/admin/points">Health Centers</Link>
             </div>
             <div>
               {" "}
-              <Link href="/admin/inventory">Inventory</Link>
+              <Link href="/frontend/admin/vaccine">Vaccines</Link>
+            </div>
+            <div>
+              {" "}
+              <Link href="/frontend/admin/inventory">Inventory</Link>
             </div>
             <div className="flex">
-              <Link href="/admin/requests">Requests</Link>
+              <Link href="/frontend/admin/requests">Requests</Link>
               {!loading && (
                 <div style={{ marginLeft: "-10px" }} className="notify">
                   {pendingRequests.length}
@@ -250,14 +258,15 @@ async function fetchRequests(){
               )}
             </div>
             <div>
-              <Link href="/admin/reports">Reports</Link>
+              <Link href="/frontend/admin/reports">Reports</Link>
             </div>
           </nav>
 
           <button
             className="logout"
             onClick={() => {
-              (router.push("/frontend/login"), localStorage.removeItem("vax-login-user"));
+              (router.push("/frontend/login"),
+                localStorage.removeItem("vax-login-user"));
             }}
           >
             Logout

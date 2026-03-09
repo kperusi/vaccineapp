@@ -54,15 +54,51 @@
 }
 
 .login-cx {
-  /* background: url("../../assets/images/bg-sidebar-desktop.svg"); */
+  background-color: white;
+  display: flex;
+  /* padding-right: 30px!important; */
+  /* align-items: flex-end; */
+gap: 70px;
+}
+.ds-bg {
+  height: 100vh;
+  background: url("../../../public/automated-vaccine-system-carousel.jpg");
   background-repeat: no-repeat;
-  background-position: 0px 50%;
-  background-size: 40%;
+  background-position: 0px 70%;
+  background-size: cover;
+  width: 47%;
+ position: relative;
+  /* border-top-right-radius: 20px; */
+}
+.ds-bg h2{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  top:30%;
+  width: 100%;
+  background-color: transparent;
+  color: rgb(203, 203, 235);
+  z-index: 1000;
+  font-size: 24px;
+  line-height: 1em;
+  
+  /* border: solid; */
+}
+.ds-bg::after{
+  content: '';
+  position: absolute;
+  background-color: darkblue;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  top: 0;
 }
 .login-form {
   height: 94vh;
   width: 41%;
-  box-shadow: 1px 5px 10px 0px rgb(38, 38, 71);
+ 
   background-color: white;
   /* background-image: url("../../assets/images/bg-pattern-circles.svg"); */
   background-repeat: no-repeat;
@@ -777,10 +813,12 @@ select {
   background: #334155;
   padding: 1px 5px;
   height: 40px;
-  /* width: 60px; */
-  border-radius: 4px;
+  width: 40px; 
+  border-radius:50%;
   color: white;
-  /* vertical-align: middle; */
+  vertical-align: middle; 
+  text-align: center;
+ padding: 8px;
 }
 
 /* Grid Layout */
@@ -1271,12 +1309,14 @@ select {
 
 @media (max-width: 768px) {
   .login-cx {
-    /* border: solid yellow; */
+  
+
+    
   }
   .login-form {
     height: 94vh;
     width: 51%;
-    box-shadow: 1px 5px 10px 0px rgb(38, 38, 71);
+    
     background-color: white;
     /* background-image: url("../../assets/images/bg-pattern-circles.svg"); */
     background-repeat: no-repeat;
@@ -1299,11 +1339,11 @@ select {
     background-repeat: no-repeat;
     background-position: 0px 50%;
     background-size: 50%;
+
   }
   .login-form {
     height: 94vh;
     width: 51%;
-    box-shadow: 1px 5px 10px 0px rgb(38, 38, 71);
     background-color: white;
     /* background-image: url("../../assets/images/bg-pattern-circles.svg"); */
     background-repeat: no-repeat;

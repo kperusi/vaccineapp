@@ -11,12 +11,12 @@ export default function Home() {
   const [msg, setMsg] = useState();
 
   async function createAdmin() {
-    await fetch("/api/seedscript", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    // await fetch("/api/seedscript", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
 
     // const res = await fetch("/api/admin/create-admin", {
     //   method: "POST",

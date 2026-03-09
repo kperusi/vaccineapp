@@ -18,15 +18,15 @@ export default function Page() {
   const [tatolInventory, setTotalInventory] = useState(0);
   const [user, setUser] = useState("");
 
-  // const {
-  //   allocations,
-  //   requests,
-  //   healthPoints,
-  //   pendingRequests,
-  //   totalVaccine,
-  //   inventories,
-  //   loading,
-  // } = useContext(globalContext);
+  const {
+    allocations,
+    requests,
+    healthPoints,
+    pendingRequests,
+    totalVaccine,
+    inventories,
+    loading,
+  } = useContext(globalContext);
   const getDaysToExpiry = (date) => {
     const today = new Date();
     const expiry = new Date(date);
@@ -46,7 +46,7 @@ export default function Page() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("/api/create-allocation", {
+    const res = await fetch("/api/admin/create-allocation", {
       method: "POST",
       body: JSON.stringify(form),
     });
@@ -87,12 +87,12 @@ export default function Page() {
         <section className="stats">
           <div className="card">
             <h3>Total Vaccines</h3>
-            {/* <p>{totalVaccine?.toLocaleString()}</p> */}
+            <p>{totalVaccine?.toLocaleString()}</p>
           </div>
 
           <div className="card">
             <h3>Active Health Facilities</h3>
-            {/* <p>{healthPoints?.length}</p> */}
+            <p>{healthPoints?.length}</p>
           </div>
 
           <div className="card">
@@ -106,7 +106,7 @@ export default function Page() {
           </div>
            <div className="card warning">
             <h3>Pending Requests</h3>
-            {/* <p>{pendingRequests.length}</p> */}
+            <p>{pendingRequests.length}</p>
           </div>
         </section>
 
@@ -127,7 +127,7 @@ export default function Page() {
             {/* <a href="/admin/reports">📄 View Reports</a> */}
           </div>
           <h3 className="m-t-30  reduce-gap-b10">Latest Pending Requests</h3>
-          {/* <section className="m-t-20 vaccine-container">
+          <section className="m-t-20 vaccine-container">
             {loading ? (
               <section className="point-loading">
                 <div className="wrapper">
@@ -161,9 +161,9 @@ export default function Page() {
                 </table>
               </section>
             )}
-          </section> */}
+          </section>
           <h3 className="m-t-30  reduce-gap-b10">Recent Allocations</h3>
-          {/* <section className="m-t-20 vaccine-container overflow-x-auto">
+          <section className="m-t-20 vaccine-container overflow-x-auto">
             {loading ? (
               <section className="point-loading">
                 <div className="wrapper">
@@ -203,7 +203,7 @@ export default function Page() {
                 </table>
               </section>
             )}
-          </section> */}
+          </section>
         </section>
 
         {isModalOpen && (

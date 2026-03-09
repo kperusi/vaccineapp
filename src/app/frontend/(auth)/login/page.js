@@ -11,7 +11,7 @@ export default function Page() {
   const [error, setError] = useState("");
   const [visible, setVisible] = useState(true);
   const [msg, setMsg] = useState();
-  const router=useRouter()
+  const router = useRouter();
 
   async function handleLogin() {
     const response = await fetch("/api/login", {
@@ -25,17 +25,19 @@ export default function Page() {
     console.log(data);
     setMsg(data.error || data.message);
 
-    if(data.status===201){
-      router.push('/frontend/admin/dashboard')
-      localStorage.setItem('vax-login-user',JSON.stringify(data.user))
+    if (data.status === 201) {
+      localStorage.setItem("vax-login-user", JSON.stringify(data.user));
+      if (data.user.role === "superadmin") {
+        router.push("/frontend/admin/dashboard");
+      } else {
+        router.push(`/frontend/health-facility/${data.user.id}/dashboard`);
+      }
     }
   }
 
   const handlePasswordVisible = () => {
     setVisible(!visible);
   };
-
-
 
   console.log(email);
 

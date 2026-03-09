@@ -5,11 +5,11 @@ export async function GET() {
   try {
     const sql = neon(process.env.DATABASE_URL);
 
-    const comments = await sql`
-      SELECT * FROM comments
+    const users = await sql`
+      SELECT * FROM users
     `;
 
-    return Response.json(comments);
+    return Response.json(users);
   } catch (error) {
     console.error(error);
 
