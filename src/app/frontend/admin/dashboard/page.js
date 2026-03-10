@@ -113,7 +113,7 @@ export default function Page() {
         <section className="quick-actions flex fxd-c ">
          
           <div className="actions flex justify-c-end">
-            <button onClick={()=>router.push('/admin/create-facilities')} className="bg-none b-1 outline-none color-black p-l-r-10 border-grey border-r-5">
+            <button onClick={()=>router.push('/frontend/admin/create-facilities')} className="bg-none b-1 outline-none color-black p-l-r-10 border-grey border-r-5">
               ➕ Create Facility
             </button>
             <button
