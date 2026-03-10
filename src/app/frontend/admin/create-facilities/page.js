@@ -36,11 +36,11 @@ export default function PointUsersPage() {
   const nextStep = () => setActiveTab((prev) => prev + 1);
   const prevStep = () => setActiveTab((prev) => prev - 1);
 
-  async function fetchUsers() {
-    const res = await fetch("/api/get-users");
-    const data = await res.json();
-    setUsers(data);
-  }
+  // async function fetchUsers() {
+  //   const res = await fetch("/api/get-users");
+  //   const data = await res.json();
+  //   setUsers(data);
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -108,31 +108,31 @@ export default function PointUsersPage() {
 
   console.log(admin);
 
-  useEffect(() => {
-    async function fetchUsers() {
-      const res = await fetch("/api/get-users");
-      console.log(">>>", res);
-      const users = await res.json();
-      setUsers(users);
-      console.log("users", users);
-    }
-    fetchUsers();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchUsers() {
+  //     const res = await fetch("/api/get-users");
+  //     console.log(">>>", res);
+  //     const users = await res.json();
+  //     setUsers(users);
+  //     console.log("users", users);
+  //   }
+  //   fetchUsers();
+  // }, []);
 
-  async function createPointUser(e) {
-    e.preventDefault();
-    setLoading(true);
+  // async function createPointUser(e) {
+  //   e.preventDefault();
+  //   setLoading(true);
 
-    await fetch("/api/admin/points", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username }),
-    });
+  //   await fetch("/api/admin/points", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ username }),
+  //   });
 
-    setUsername("");
-    setLoading(false);
-    fetchUsers();
-  }
+  //   setUsername("");
+  //   setLoading(false);
+ 
+  // }
 
   async function toggleStatus(id, is_active) {
     await fetch("/api/admin/points", {
@@ -141,7 +141,7 @@ export default function PointUsersPage() {
       body: JSON.stringify({ id, is_active: !is_active }),
     });
 
-    fetchUsers();
+    // fetchUsers();
   }
 
   return (

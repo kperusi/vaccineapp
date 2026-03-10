@@ -63,7 +63,7 @@ export default function PointUsersPage() {
   };
 
   return (
-    <main className="p-30">
+    <main className="p-30 main-facility">
       <section className="page-header">
         <div className="flex fxd-c">
           <h2>Health Centers</h2>
@@ -86,7 +86,7 @@ export default function PointUsersPage() {
         </div>
       )}
       {healthPoints?.length > 0 && (
-        <section className="flex fxd-c  gap-20 align-item-c scroll-container p-b-20">
+        <section className="flex fxd-c gap-20 align-item-c scroll-container p-b-20 md-facility">
           <div className="containerh">
             <div className="session-list ">
               {healthPoints.map((hp, i) => (

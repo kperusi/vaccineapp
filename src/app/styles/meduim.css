@@ -32,14 +32,12 @@
     background-repeat: no-repeat;
     background-position: 0px 0px;
   }
-  .dashboard {
-  }
+  
   .ms-header {
     display: flex !important;
     width: 100%;
   }
-  .main-dashboard {
-  }
+  
   body {
     height: 100vh;
   }
@@ -52,5 +50,51 @@
   .class-modal {
    
     width: 100% !important;
+  }
+  .page-header{
+   
+    display: none !important;
+  }
+  .main-facility{
+  
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+  .md-facility{
+     
+      width: 100% !important;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+  }
+  .containerh{
+ 
+    width: 100%;
+  }
+  .session-list{
+   
+     width: 100%;
+  }
+  .session-header{
+     
+
+  }
+  .session-card{
+  
+  
+      width: 100% !important;
+  }
+  .session-info h3{
+    font-size: 14px !important;
+   
+  }
+   .session-info p{
+    font-size: 12px !important;
+      
+  }
+  .status-dot{
+    width: 20px !important;
+    height: 10px !important;
   }
 }
