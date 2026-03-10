@@ -69,7 +69,8 @@
       justify-content: center;
   }
   .containerh{
- 
+padding-left: 9px;
+padding-right: 9px;
     width: 100%;
   }
   .session-list{
@@ -77,12 +78,14 @@
      width: 100%;
   }
   .session-header{
-     
+    padding-top: 2px !important;
+  padding-bottom: 4px !important;
 
   }
   .session-card{
   
-  
+  padding-top: 2px !important;
+  padding-bottom: 0 !important;
       width: 100% !important;
   }
   .session-info h3{
