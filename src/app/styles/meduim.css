@@ -39,10 +39,18 @@
     width: 100%;
   }
   .main-dashboard {
-  
   }
-  body{
-  
+  body {
     height: 100vh;
+  }
+  .modal-show {
+   
+    width: 100%;
+    left: 0 !important;
+    padding: 0 7px!important;
+  }
+  .class-modal {
+   
+    width: 100% !important;
   }
 }
