@@ -17,6 +17,36 @@
 height: 80vh;
 padding-bottom: 50px;
 }
+
+
+
+
+
+
+.loader-span{
+  display: block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border-top: 2px solid white;
+  /* background-color: white; */
+  animation: spin 1s infinite;
+}
+
+.loader-cx{
+  display: flex;
+gap: 20px;
+  align-items: center;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+   
+    100% { transform: rotate(360deg); }
+}
+
+
+
 .fxd-r {
   flex-direction: row;
 }
@@ -391,7 +421,6 @@ p {
 .btn-primary {
   /* background: #2563eb; */
   background: #10b981;
-
   color: white;
   border: none;
   padding: 10px 20px;
@@ -407,7 +436,7 @@ p {
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
-  width: 50%;
+  width: 20%;
 }
 /* .btn-back {
   background: #10b981;

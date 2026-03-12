@@ -12,10 +12,10 @@ export default function PointUsersPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [fullname, setFullName] = useState("");
-   
+
   const [adminEmail, setAdminEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [isModalShow, setIsModalShow] = useState(false);
   const [errorMsg, setErrorMsg] = useState({
     nameError: "",
@@ -45,13 +45,13 @@ export default function PointUsersPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
-
+    setLoading(true);
     const res = await fetch("/api/admin/create-facility", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         fullname,
-        username,
+        username:adminEmail,
         adminEmail,
         password,
         admin,
@@ -65,9 +65,9 @@ export default function PointUsersPage() {
       setMessage(data.message || "Failed to create user");
       return;
     }
-    console.log(data)
+    console.log(data.status);
 
-    if (data.status === 201) {
+    if (data.message.includes('successfully')) {
       setMessage("✅ Facility created and  user added successfully");
       setFullName("");
       setAdminEmail("");
@@ -84,7 +84,6 @@ export default function PointUsersPage() {
 
       setLoading(false);
 
-      fetchUsers();
       prevStep();
     }
   };
@@ -106,7 +105,7 @@ export default function PointUsersPage() {
     setAdminRole();
   }, []);
 
-  console.log(admin);
+
 
   // useEffect(() => {
   //   async function fetchUsers() {
@@ -131,7 +130,7 @@ export default function PointUsersPage() {
 
   //   setUsername("");
   //   setLoading(false);
- 
+
   // }
 
   async function toggleStatus(id, is_active) {
@@ -145,11 +144,11 @@ export default function PointUsersPage() {
   }
 
   return (
-    <main className="p-l-r-60 scroll-container">
+    <main className="p-l-r-60 scroll-container ms-create-facility">
       <section>
         <div
           // style={{ position: "sticky", top: "3px", backgroundColor: "#f6f7f8" }}
-          className=""
+          className="md-create-facility-title"
         >
           <h2>Health Center Management</h2>
           <p style={{ color: "#1e293b" }}>
@@ -158,7 +157,7 @@ export default function PointUsersPage() {
         </div>
 
         <section className="teacher-container">
-          <div className="wizard-card">
+          <div className="wizard-card ms-wz-card">
             {/* Progress Header */}
             <div className="wizard-header">
               <div className={`step ${activeTab >= 1 ? "active" : ""}`}>
@@ -182,7 +181,7 @@ export default function PointUsersPage() {
                         required
                         placeholder="full name"
                         onInput={() =>
-                          setErrorMsg({ ...errorMsg, nameError: "" })
+                        {  setErrorMsg({ ...errorMsg, nameError: "" }),setMessage('')}
                         }
                         onChange={(e) =>
                           setHealthCenterForm({
@@ -310,7 +309,9 @@ export default function PointUsersPage() {
               {/* STEP 2: LOGIN DETAILS */}
               {activeTab === 2 && (
                 <section className="fade-in">
-                  <h3>Health Center Admin Details</h3>
+                  <h3 className="md-add-admin-title">
+                    Health Center Admin Details
+                  </h3>
                   <div className="input-group">
                     <label>Full Name</label>
                     <input
@@ -320,7 +321,7 @@ export default function PointUsersPage() {
                       onChange={(e) => setFullName(e.target.value)}
                     />
                   </div>
-                     <div className="input-group">
+                  {/* <div className="input-group">
                     <label>Username</label>
                     <input
                       type="text"
@@ -328,7 +329,7 @@ export default function PointUsersPage() {
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                     />
-                  </div>
+                  </div> */}
 
                   <div className="input-group">
                     <label>Email </label>
@@ -354,14 +355,24 @@ export default function PointUsersPage() {
                   </div>
                   <div className="btn-row justify-c">
                     <button
-                      className="font-s-16 weight-600 bg-none color-darkblue outline-none b-1 border-grey border-r-5 p-l-r-10"
+                      className="font-s-16 md-back weight-600 bg-none color-darkblue outline-none b-1 border-grey border-r-5 p-l-r-10"
                       onClick={prevStep}
                     >
                       ← Back
                     </button>
 
-                    <button className="btn-main" onClick={handleSubmit}>
-                      Add Center
+                    <button
+                      className="btn-main loader-cx"
+                      onClick={handleSubmit}
+                    >
+                      {loading ? (
+                        <>
+                          <span className="loader-span"></span>
+                          <span>Saving...</span>
+                        </>
+                      ) : (
+                        <span> Add Center</span>
+                      )}
                     </button>
                   </div>
                 </section>
@@ -369,16 +380,10 @@ export default function PointUsersPage() {
             </div>
           </div>
         </section>
-{message}
-        {/* <div className="class-modal">
-            <section className="wizard-content"></section>
-
-            {message && <p>{message}</p>}
-            
-            <button>
-              ← Back to Dashboard
-            </button>
-          </div> */}
+        <div className="msg">
+            <p>{message}</p>
+        </div>
+      
       </section>
     </main>
   );

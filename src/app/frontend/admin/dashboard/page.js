@@ -126,6 +126,11 @@ export default function Page() {
             </button>
             {/* <a href="/admin/reports">📄 View Reports</a> */}
           </div>
+
+<div className="ring-loader"></div>
+
+
+
           <h3 className="m-t-30  reduce-gap-b10">Latest Pending Requests</h3>
           <section className="m-t-20 vaccine-container">
             {loading ? (

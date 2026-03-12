@@ -100,4 +100,47 @@ padding-right: 9px;
     width: 20px !important;
     height: 10px !important;
   }
+  .ms-create-facility{
+
+    padding: 0 5px !important;
+  
+  }
+  .ms-wz-card{
+   
+    width: 100% !important;
+  }
+  .wizard-content{
+padding: 10px !important;
+  }
+  .btn-row{
+  
+    padding: 0 !important;
+    justify-content: space-between;
+  }
+  .btn-main{
+    width: 50% !important;
+  }
+  .md-back{
+    width: 50%;
+  }
+  .md-create-facility-title{
+    padding: 10px;
+  }
+  .md-create-facility-title h2{
+font-size: 16px !important;
+  }
+    .md-create-facility-title p{
+font-size: 13px !important;
+  }
+  .md-add-admin-title{
+    font-size: 14px;
+  }
+  .msg{
+    background-color: white;
+
+  }
+  .msg p{
+    padding: 10px;
+    color: red;
+  }
 }
