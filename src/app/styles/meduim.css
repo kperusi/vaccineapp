@@ -16,12 +16,18 @@
 
   .login-form {
     padding: 0 20px;
-    width: 100% !important;
+    width: 95% !important;
     height: fit-content !important;
     background-color: white;
     /* background-image: url("../../assets/images/bg-pattern-circles.svg"); */
     background-repeat: no-repeat;
     background-position: 200px 400px !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding-top: 20px;
+  }
+  .ms-login-text{
+    font-size: 17px;
   }
   .ms-bg {
     display: none;
@@ -32,114 +38,99 @@
     background-repeat: no-repeat;
     background-position: 0px 0px;
   }
-  
+
   .ms-header {
     display: flex !important;
     width: 100%;
   }
-  
+
   body {
     height: 100vh;
   }
   .modal-show {
-   
     width: 100%;
     left: 0 !important;
-    padding: 0 7px!important;
+    padding: 0 7px !important;
   }
   .class-modal {
-   
     width: 100% !important;
   }
-  .page-header{
-   
+  .page-header {
     display: none !important;
   }
-  .main-facility{
-  
+  .main-facility {
     display: flex;
     justify-content: center;
     padding: 0;
   }
-  .md-facility{
-     
-      width: 100% !important;
-      display: flex !important;
-      align-items: center;
-      justify-content: center;
+  .md-facility {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
   }
-  .containerh{
-padding-left: 9px;
-padding-right: 9px;
+  .containerh {
+    padding-left: 9px;
+    padding-right: 9px;
     width: 100%;
   }
-  .session-list{
-   
-     width: 100%;
+  .session-list {
+    width: 100%;
   }
-  .session-header{
+  .session-header {
     padding-top: 2px !important;
-  padding-bottom: 4px !important;
-
+    padding-bottom: 4px !important;
   }
-  .session-card{
-  
-  padding-top: 2px !important;
-  padding-bottom: 0 !important;
-      width: 100% !important;
+  .session-card {
+    padding-top: 2px !important;
+    padding-bottom: 0 !important;
+    width: 100% !important;
   }
-  .session-info h3{
+  .session-info h3 {
     font-size: 14px !important;
-   
   }
-   .session-info p{
+  .session-info p {
     font-size: 12px !important;
-      
   }
-  .status-dot{
+  .status-dot {
     width: 20px !important;
     height: 10px !important;
   }
-  .ms-create-facility{
-
+  .ms-create-facility {
     padding: 0 5px !important;
-  
   }
-  .ms-wz-card{
-   
+  .ms-wz-card {
     width: 100% !important;
   }
-  .wizard-content{
-padding: 10px !important;
+  .wizard-content {
+    padding: 10px !important;
   }
-  .btn-row{
-  
+  .btn-row {
     padding: 0 !important;
     justify-content: space-between;
   }
-  .btn-main{
+  .btn-main {
     width: 50% !important;
   }
-  .md-back{
+  .md-back {
     width: 50%;
   }
-  .md-create-facility-title{
+  .md-create-facility-title {
     padding: 10px;
   }
-  .md-create-facility-title h2{
-font-size: 16px !important;
+  .md-create-facility-title h2 {
+    font-size: 16px !important;
   }
-    .md-create-facility-title p{
-font-size: 13px !important;
+  .md-create-facility-title p {
+    font-size: 13px !important;
   }
-  .md-add-admin-title{
+  .md-add-admin-title {
     font-size: 14px;
   }
-  .msg{
+  .msg {
     background-color: white;
-
   }
-  .msg p{
+  .msg p {
     padding: 10px;
     color: red;
   }

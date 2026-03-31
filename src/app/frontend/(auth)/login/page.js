@@ -42,10 +42,7 @@ export default function Page() {
   console.log(email);
 
   return (
-    <main
-   
-      className="flex login-cx"
-    >
+    <main className="flex login-cx">
       <div className="ds-bg">
         <h2>
           <strong>Welcome Back </strong>
@@ -57,7 +54,8 @@ export default function Page() {
         <div className="flex fxd-c p-30 p-md-0  input-group gap-20 justify-c align-item-c">
           <div className="flex fxd-c w-full ">
             <h2 className="color-black"></h2>
-            <h3 className="color-grey">Login to Continue</h3>
+            <h2 className="color-grey ms-login-text">Login to Continue</h2>
+            
           </div>
           <div className="flex fxd-c w-full p-t-20">
             <label>Username</label>
@@ -80,25 +78,30 @@ export default function Page() {
               required
               autoComplete="off"
             />
-            <Image
-              style={{ alignSelf: "flex-end" }}
-              onClick={handlePasswordVisible}
-              alt="password visibility"
-              width={20}
-              height={20}
-              src={`${visible ? "/visibility_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" : "/visibility_off_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"}`}
-            />
+            <div style={{ display: "flex",gap:'10px',paddingTop:'10px', justifyContent: "flex-end" }}>
+              <p style={{color:'darkblue'}}>
+                {visible ? "View password" : "Hide password"}
+              </p>
+              <Image
+                style={{ alignSelf: "flex-end" }}
+                onClick={handlePasswordVisible}
+                alt="password visibility"
+                width={20}
+                height={20}
+                src={`${visible ? "/visibility_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" : "/visibility_off_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"}`}
+              />
+            </div>
+
             {/* </div> */}
           </div>
 
           <button
             onClick={handleLogin}
-            className="bg-darkblue color-white outline-none border-none border-r-8 p-15 m-t-20 w-50p"
+            className="bg-darkblue color-white outline-none border-none border-r-8 p-15 m-t-20 w-full"
           >
             Login
           </button>
           <div style={{ height: "50px" }} className="p-10">
-            {" "}
             {error && <p className="color-red">{error}</p>}
           </div>
         </div>
