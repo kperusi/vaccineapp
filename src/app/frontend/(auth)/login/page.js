@@ -14,6 +14,7 @@ export default function Page() {
   const router = useRouter();
 
   async function handleLogin() {
+    setMsg("");
     const response = await fetch("/api/login", {
       method: "POST",
       headers: {
@@ -22,7 +23,7 @@ export default function Page() {
       body: JSON.stringify({ email, password }),
     });
     const data = await response.json();
-    console.log(data);
+    console.log(data.message);
     setMsg(data.error || data.message);
 
     if (data.status === 201) {
@@ -55,7 +56,6 @@ export default function Page() {
           <div className="flex fxd-c w-full ">
             <h2 className="color-black"></h2>
             <h2 className="color-grey ms-login-text">Login to Continue</h2>
-            
           </div>
           <div className="flex fxd-c w-full p-t-20">
             <label>Username</label>
@@ -63,6 +63,7 @@ export default function Page() {
               type="email"
               placeholder="Email"
               value={email}
+              onInput={() => setMsg("")}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -74,12 +75,20 @@ export default function Page() {
               type={visible ? "password" : "text"}
               placeholder="Password"
               value={password}
+              onInput={() => setMsg("")}
               onChange={(e) => setPassword(e.target.value)}
               required
               autoComplete="off"
             />
-            <div style={{ display: "flex",gap:'10px',paddingTop:'10px', justifyContent: "flex-end" }}>
-              <p style={{color:'darkblue'}}>
+            <div
+              style={{
+                display: "flex",
+                gap: "10px",
+                paddingTop: "10px",
+                justifyContent: "flex-end",
+              }}
+            >
+              <p style={{ color: "darkblue" }}>
                 {visible ? "View password" : "Hide password"}
               </p>
               <Image
@@ -102,7 +111,15 @@ export default function Page() {
             Login
           </button>
           <div style={{ height: "50px" }} className="p-10">
-            {error && <p className="color-red">{error}</p>}
+            {msg?.includes("fetch failed") && (
+              <p className="color-red">Internet Failure</p>
+            )}
+            {msg?.includes("Invalid credentials") && (
+              <p className="color-red">Check your login details</p>
+            )}
+              {msg?.includes("successful") && (
+              <p style={{color:'green'}}>Login successful</p>
+            )}
           </div>
         </div>
       </div>

@@ -21,6 +21,7 @@ export async function GET() {
         status,
         created_at
       FROM facilities
+      WHERE status = 'active'
       ORDER BY created_at DESC
     `;
 // console.log('...',facilities)

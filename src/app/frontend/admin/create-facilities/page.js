@@ -1,7 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
-// import "./pointstyle.css";
-// import "./activeborder.css";
+import { useEffect, useState,useContext } from "react";
+import { globalContext } from "../../../utils/context/globalContext";
 import "../../../styles/styles.css";
 import { useRouter } from "next/navigation";
 
@@ -17,6 +16,8 @@ export default function PointUsersPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState('');
   const [isModalShow, setIsModalShow] = useState(false);
+  const { stock, pendingStock, approvedRequest,superAdmin ,fetchFacilities} =
+      useContext(globalContext);
   const [errorMsg, setErrorMsg] = useState({
     nameError: "",
     emailError: "",
@@ -36,12 +37,7 @@ export default function PointUsersPage() {
   const nextStep = () => setActiveTab((prev) => prev + 1);
   const prevStep = () => setActiveTab((prev) => prev - 1);
 
-  // async function fetchUsers() {
-  //   const res = await fetch("/api/get-users");
-  //   const data = await res.json();
-  //   setUsers(data);
-  // }
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -83,7 +79,7 @@ export default function PointUsersPage() {
       });
 
       setLoading(false);
-
+fetchFacilities()
       prevStep();
     }
   };

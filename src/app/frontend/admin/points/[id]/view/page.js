@@ -14,10 +14,11 @@ export default function PointDashboard() {
   const { id } = params;
   const [user, setUser] = useState();
   const [inventory, setInventory] = useState();
-  const { loading, stock, pendingStock, approvedRequest } =
+  const { loading, stock, pendingStock, approvedRequest,superAdmin ,fetchFacilities} =
     useContext(globalContext);
   const router = useRouter();
   const [facility, setFacility] = useState([]);
+  const [msg, setMessage] = useState("");
 
   useEffect(() => {
     async function loadData() {
@@ -63,6 +64,34 @@ export default function PointDashboard() {
     return Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
   };
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    setMessage("");
+
+    const res = await fetch("/api/admin/delete-facility", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        superAdmin,
+        id,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setMessage(data.message || "Failed to delete facility");
+      return;
+    }
+    console.log(data.status);
+
+    if (data.message.includes("successfully")) {
+      setMessage("✅ Facility deleted successfully");
+      fetchFacilities()
+      router.push("/frontend/admin/points");
+    }
+  };
+
   if (loading) {
     return (
       <section
@@ -79,42 +108,32 @@ export default function PointDashboard() {
     );
   }
 
-  console.log(user);
-
   return (
-    <main className="dashboard-container flex fxd-c scroll-container ">
+    <main className="dashboard-container flex fxd-c">
       <div className="admin-profile-wrapper">
         {/* 1. TOP HEADER: Global Actions */}
         <div className="flex gap-10 align-item-c p-5"></div>
         <header className="admin-profile-header">
           <div className="header-identity">
-            <div>
-              {/* <div className="admin-avatar">
-                {facility?.name
-                  ?.split(" ")
-                  .map((n) => n[0])
-                  .join("")}
-              
-              </div> */}
-            </div>
+            <div></div>
 
             <div>
-              <span className="admin-badge">{facility.type}</span>
+              <span
+                style={{
+                  padding: "0px 5px",
+                  backgroundColor: "#4f46e5",
+                  textAlign: "center",
+                  borderRadius: "2px",
+                }}
+              >
+                {facility.type}
+              </span>
 
               <h1 className="flex fxd-c color-white">{facility?.name}</h1>
               <p className="reduce-gap-0 color-grey-184">
                 {facility.email} | {facility.address}
               </p>
             </div>
-          </div>
-          <div className="flex gap-10">
-            <div className="admin-badge flex fxd-r justify-c">
-              <button className="border-none bg-none color-white cursor-pointer p-l-5">
-                Edit Staff Details
-              </button>
-            </div>
-
-            <button className="btn-danger">Delete Staff</button>
           </div>
         </header>
 
@@ -247,16 +266,14 @@ export default function PointDashboard() {
           {/* 3. MAIN COLUMN: Workload & Assignments */}
           <div className="main-admin-content w-full">
             {/* 4. PERFORMANCE SNIPPET */}
-            <section className="admin-card ">
-              <h3>Result Entry Progress</h3>
-              <div className="progress-container">
-                <div className="progress-label">
-                  <span>First Term 2025</span>
-                  <span>85% Completed</span>
-                </div>
-                <div className="progress-bar">
-                  <div className="progress-fill" style={{ width: "85%" }}></div>
-                </div>
+            <section className=" ">
+              <div className="flex gap-10 justify-c-end">
+                <button className="bg-none cursor-pointer p-5 border-r-5">
+                  Edit Health Center Details
+                </button>
+                <button className="btn-danger" onClick={(e) => handleDelete(e)}>
+                  Deactivate Health Center
+                </button>
               </div>
             </section>
           </div>

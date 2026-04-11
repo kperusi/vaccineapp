@@ -209,12 +209,13 @@ export default function AdminLayout({ children }) {
     if (pathname.includes("points")) return "Health Centers";
     if (pathname.includes("create-facilities")) return "Add Health Centers";
   };
-
+console.log('00000',user)
 
   return (
     <main className="dashboard">
       <globalContext.Provider
         value={{
+          superAdmin:user,
           vaccines: vaccines,
           setVaccines: setVaccines,
           fetchVaccines:fetchVaccines,

@@ -81,7 +81,7 @@ export default function Page() {
   return (
     <main
      
-      className="scroll-container w-full flex fxd-c main-dashboard "
+      className=" scroll-container w-full flex fxd-c main-dashboard "
     >
       <section className="p-l-r-30 p-t-20">
         <section className="stats">

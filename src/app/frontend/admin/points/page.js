@@ -63,7 +63,7 @@ export default function PointUsersPage() {
   };
 
   return (
-    <main className="p-30 main-facility">
+    <main className="p-30 main-facility scroll-container main-dashboard">
       <section className="page-header">
         <div className="flex fxd-c">
           <h2>Health Centers</h2>
@@ -105,7 +105,7 @@ export default function PointUsersPage() {
                       <div className="">
                         <div className="flex">
                           <h3>{hp.name}</h3>
-                          {facilityRequests[hp.id]?.filter(
+                          {facilityRequests[hp.id]?.length>0&&facilityRequests[hp.id]?.filter(
                             (i) => i.status === "pending",
                           ) && (
                             <span className="notify">
